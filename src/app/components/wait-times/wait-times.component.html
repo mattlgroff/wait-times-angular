@@ -1,18 +1,39 @@
 <mat-tab-group (selectedTabChange)="tabChanged($event)">
-  <mat-tab label="Animal Kingdom">
-    <h1>Some tab content</h1>
-    <p>...</p>
-  </mat-tab>
+  <mat-tab label="Animal Kingdom"
+    ><ng-container *ngIf="waitTimes; else loading">
+      <ng-container
+        *ngTemplateOutlet="waitTimeCards"
+      ></ng-container> </ng-container
+  ></mat-tab>
   <mat-tab label="EPCOT">
-    <h1>Some more tab content</h1>
-    <p>...</p>
+    <ng-container *ngIf="waitTimes; else loading">
+      <ng-container *ngTemplateOutlet="waitTimeCards"></ng-container>
+    </ng-container>
   </mat-tab>
   <mat-tab label="Hollywood Studios">
-    <h1>Some more tab content</h1>
-    <p>...</p>
-  </mat-tab>
+    <ng-container *ngIf="waitTimes; else loading">
+      <ng-container
+        *ngTemplateOutlet="waitTimeCards"
+      ></ng-container> </ng-container
+  ></mat-tab>
   <mat-tab label="Magic Kingdom">
-    <h1>Some more tab content</h1>
-    <p>...</p>
+    <ng-container *ngIf="waitTimes; else loading">
+      <ng-container *ngTemplateOutlet="waitTimeCards"></ng-container>
+    </ng-container>
   </mat-tab>
 </mat-tab-group>
+
+<ng-template #waitTimeCards>
+  <ng-container *ngFor="let ride of waitTimes">
+    <mat-card>
+      <mat-card-title>{{ ride.name }}</mat-card-title>
+      <mat-card-subtitle>{{ ride.waitTime }}</mat-card-subtitle>
+    </mat-card>
+  </ng-container>
+</ng-template>
+
+<ng-template #loading>
+  <mat-card>
+    LOADING...
+  </mat-card>
+</ng-template>

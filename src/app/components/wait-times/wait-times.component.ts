@@ -24,7 +24,7 @@ export interface WaitTime {
   styleUrls: ['./wait-times.component.scss'],
 })
 export class WaitTimesComponent implements OnInit {
-  public waitTimes: WaitTime[] = [];
+  public waitTimes: WaitTime[];
   public selectedTab = 'Animal Kingdom';
 
   constructor(private waitTimesService: WaitTimesService) {}
@@ -35,6 +35,7 @@ export class WaitTimesComponent implements OnInit {
 
   public tabChanged(selectedTab: MatTabChangeEvent): void {
     this.selectedTab = selectedTab.tab.textLabel;
+    this.waitTimes = null;
     this.getWaitTimes();
   }
 

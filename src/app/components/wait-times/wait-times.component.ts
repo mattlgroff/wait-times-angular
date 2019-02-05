@@ -42,6 +42,10 @@ export class WaitTimesComponent implements OnInit {
   public getWaitTimes(): void {
     this.waitTimesService
       .getPark(this.selectedTab)
-      .subscribe((waitTimes: WaitTime[]) => (this.waitTimes = waitTimes));
+      .subscribe((waitTimes: WaitTime[]) => {
+        this.waitTimes = waitTimes
+          .filter(ride => ride.fastPass)
+          .sort((a, b) => a.name.localeCompare(b.name));
+      });
   }
 }
